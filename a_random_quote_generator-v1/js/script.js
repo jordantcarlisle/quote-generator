@@ -6,114 +6,104 @@ http://jordancarlisle.com
 https://twitter.com/jordantcarlise
 https://github.com/jordantcarlise
 ******************************************/
+//Load quote when clicked
+document.getElementById('load-quote').addEventListener("click", printQuote, false);
 
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
+var stringOfQuoteProperties = '';
 
-// This is an object that stores arrays with quotes.]
+// Object that stores arrays with quotes in global scope.
+
 var quotes = [
-{
-  quote: 'I made the internet',
-  source:'Al Gore',
-  citation:'Britanica',
-  year:'2000'
-},
-{
-  quote: "I'm Bob Dole",
-  source:'Bob Dole',
-  citation:'The Internet',
-  year:'1999'
-},
 
-{
-  quote: 'Health care and education, in my view, are next up for fundamental software-based transformation.',
-  source:'Marc Andreessen',
-  citation:'Brainy Quotes',
-  year:'2019'
-},
+  {
+    quote: 'I made the internet',
+    source:'Al Gore',
+    tag: 'politics'
 
-{
-  quote: "I'm Bob Dole",
-  source:'Bob Dole',
-  citation:'The Internet',
-  year:'1999'
-},
+  },
+  {
+    quote: "I'm Bob Dole",
+    source:'Bob Dole',
+    citation:'The Internet',
+    year:'1999',
+    tag: 'politics'
+  },
 
-{
-  quote: 'The Internet Made Me',
-  source:'Andrew Swartz',
-  citation:'Wikipedia',
-  year:'2006'
-}
+  {
+    quote: 'Health care and education, in my view, are next up for fundamental software-based transformation.',
+    source:'Marc Andreessen',
+    citation:'Brainy Quotes',
+    year:'2019',
+    tag: 'technology'
+  },
+
+  {
+    quote: "I'm Bob Dole",
+    source:'Bob Dole',
+    citation:'The Internet',
+    year:'1999',
+    //Can an array property have multiple values?
+    tag: 'politics'
+
+  },
+
+  {
+    quote: 'The Internet Made Me',
+    source:'Andrew Swartz',
+    citation:'Wikipedia',
+    year:'2006',
+    tag: 'history',
+  },
+
+  {
+    quote: 'I know what you mean.',
+    source:'OuinerSausage',
+    citation:'Discordtopia',
+    year:'2019',
+    tag: 'philosophy',
+  }
 
 ];
 
 
-/***
-  Create the `getRandomQuote` function to:
-   - generate a random number
-   - use the random number to `return` a random quote object from the
-     `quotes` array.
-***/
+//This function generates a random number, passes it to the quotes variable, which references the array within the quotes object that coincides with that random number.
 
-function getRandomQuote(quotes) {
-// generate a random number between 0 and the last index in the array parameter
-let randomNumber = Math.ceil(Math.random() * 2);
-// use the random number and box notation to grab a random item from the array
-quotes [randomNumber];
-// return the random item
-return.getRandomQuote();
+function getRandomQuote(array) {
+  var rando = Math.floor(Math.random() * array.length);
+  return array[rando];
 };
 
-
-/***
-  Create the `printQuote` function to:
-   - call the `getRandomQuote` function and assign it to a variable.
-   - use the properties of the quote object stored in the variable to
-     create your HTML string.
-   - use conditionals to make sure the optional properties exist before
-     they are added to the HTML string.
-   - set the `innerHTML` of the `quote-box` div to the HTML string.
-***/
-
 function printQuote() {
-// create a variable that calls the getRandomQuote() function, passing in the quotes array as an argument
-let randomQuote = getRandomQuote (quotes);
-// create a variable that initiates your HTML string
 
-if (quote.citation && quote.year = true ) print = '<p class="quote">'+ quotes.quote +'</p>'
-'<p class="source">'+ quotes.source + '<span class="citation"> ' + quotes.citation + '</span><span class="year">' + quotes.year + '</span></p>'
-
-// using the template in the project instructions, add the two default quote properties
-// if there is a quote.citation property, add it the string
-// if there is a quote.year property, add it the string
-// close the string with the necessary closing HTML tags
-// set the innnerHTML of the .quote-box to the complete HTML string
+  var randomQuote = getRandomQuote (quotes);
+  var quoteHTML = '<p class="quote">'+ randomQuote.quote +'</p><p class="tag">' + randomQuote.tag + '</p> <p class="source">' + randomQuote.source;
+  if (randomQuote.citation){
+    quoteHTML += '<span class="citation">' + randomQuote.citation +'</span>';
+  }
+  if (randomQuote.year){
+    quoteHTML += '<span class="year">' + randomQuote.year +'</span>';
+  }
+  quoteHTML += '</p>';
+  document.getElementById('quote-box').innerHTML = quoteHTML;
 }
-
-function printQuote() {
-  getRandomQuote();
-
-  <p class="quote"> [quote here] </p>
-  <p class="source"> [source here]
-  <span class="citation"> [citation here] </span>
-  <span class="year"> [year here] </span>
-</p>
-}
-
-//I need to figure out how to print based on the random number and reference to the the object store.
-
-document.getElementById('quote-box').innerHTML = stringOfQuoteProperties;
-
-
 /***
   When the "Show another quote" button is clicked, the event listener
   below will be triggered, and it will call, or "invoke", the `printQuote`
-  function. So do not make any changes to the line of code below this
-  comment.
+  function.
 ***/
 
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+function randomColorGenerator() {
+	var randomColor;
+	red = Math.floor(Math.random() * 256 );
+	green = Math.floor(Math.random() * 256 );
+	blue = Math.floor(Math.random() * 256 );
+	randomColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
+	return randomColor;
+}
 
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+//Generate random color
+randomColorGenerator();
+//Update background with new random color
+document.getElementById('random-color').style.backgroundColor = randomColorGenerator();
